@@ -30,7 +30,7 @@ try:
             break
 
     # second convert dat file
-    in_file = 'in1.dat'
+    in_file = 'in.dat'
     out_file = 'out.jpg'
 
     binfile = open(in_file, 'rb')

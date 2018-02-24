@@ -1,2 +1,2 @@
-a=input(u'path\n')
+a=input(u'path:\n')
 print(a)
