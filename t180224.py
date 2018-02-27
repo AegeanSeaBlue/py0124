@@ -41,8 +41,8 @@ try:
     print(ruleDict)
     print(ruleDictHex)
     # second convert dat file
-    in_file = 'in.dat'
-    out_file = 'out.jpg'
+    in_file = 'in2.dat'
+    out_file = 'out2.jpg'
 
     binfile = open(in_file, 'rb')
     a = binfile.read()

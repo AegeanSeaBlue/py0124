@@ -4,6 +4,11 @@ import time
 
 
 def copyFile(src, descDir):
-    srcPath, fileName = os.path.split(src)
-    descPath = descDir + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + '_' + fileName
-    shutil.copy(src, descPath)
+    try:
+        srcPath, fileName = os.path.split(src)
+        print(fileName)
+        descPath = descDir + time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime(time.time())) + '_' + fileName
+        shutil.copy(src, descPath)
+    except:
+        print('Copy DAT Failed!')
+        pass
