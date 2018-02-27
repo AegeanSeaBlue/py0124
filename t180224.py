@@ -1,4 +1,5 @@
 import traceback
+import os
 
 try:
     # wechat image convert
