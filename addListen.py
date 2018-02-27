@@ -1,6 +1,7 @@
 from watchdog.observers import Observer
 from watchdog.events import *
 import time
+from copyFile import copyFile
 
 
 class FileEventHandler(FileSystemEventHandler):
@@ -14,22 +15,23 @@ class FileEventHandler(FileSystemEventHandler):
     #         print("file moved from {0} to {1}".format(event.src_path, event.dest_path))
 
     def on_created(self, event):
-        if event.is_directory is False:
-            #print("directory created:{0}".format(event.src_path))
-        #else:
-            print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),'---',"file created:{0}".format(event.src_path))
+        if (event.is_directory is False) and ('Tiny' in event.src_path is False):
+            # print("directory created:{0}".format(event.src_path))
+            # else:
+            copyFile(event.src_path, 'D:/image/weixintemp/dat/')
+            print(event.src_path)
 
-    # def on_deleted(self, event):
-    #     if event.is_directory:
-    #         print("directory deleted:{0}".format(event.src_path))
-    #     else:
-    #         print("file deleted:{0}".format(event.src_path))
+            # def on_deleted(self, event):
+            #     if event.is_directory:
+            #         print("directory deleted:{0}".format(event.src_path))
+            #     else:
+            #         print("file deleted:{0}".format(event.src_path))
 
-    # def on_modified(self, event):
-    #     if event.is_directory:
-    #         print("directory modified:{0}".format(event.src_path))
-    #     else:
-    #         print("file modified:{0}".format(event.src_path))
+            # def on_modified(self, event):
+            #     if event.is_directory:
+            #         print("directory modified:{0}".format(event.src_path))
+            #     else:
+            #         print("file modified:{0}".format(event.src_path))
 
 
 if __name__ == "__main__":

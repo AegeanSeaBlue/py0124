@@ -1,10 +1,12 @@
 import os, shutil
 
-srcf = 'D:/practice/py0124/out.jpg'
+srcf = 'D:/practice/py0124\out.jpg'
 descDirc = 'D:/practice/py0124/testf/'
+
 
 path, name = os.path.split(srcf)
 descFile = descDirc + name
+print(descFile)
 copy = shutil.copyfile(srcf, descFile)
 size=os.path.getsize(copy)
 size = int(size/1024)

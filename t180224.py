@@ -1,9 +1,8 @@
 import traceback
-import os
+import binascii
 
 try:
     # wechat image convert
-    import binascii
 
     # first need two file to find rule
     trans = 'color_trans.dat'
@@ -12,24 +11,35 @@ try:
     binfile = open(trans, 'rb')
     a = binfile.read()
     hex_trans = binascii.b2a_hex(a)
+    # print(hex_trans)
 
     binfile = open(sheet, 'rb')
     a = binfile.read()
     hex_sheet = binascii.b2a_hex(a)
+    # print(hex_sheet)
 
     rule = [0] * 256
     flag = [False] * 256
+    ruleDict = {}
+    ruleDictHex = {}
+
     for i in range(len(hex_trans) // 2):
         hex_t = hex_trans[2 * i:2 * (i + 1)]
         hex_s = hex_sheet[2 * i:2 * (i + 1)]
+        ruleDictHex[str(hex_t, encoding='utf-8')] = str(hex_s, encoding='utf-8')
+
         int_t = int(hex_t, 16)
         int_s = int(hex_s, 16)
+
         if flag[int_t] == False:
             rule[int_t] = int_s
             flag[int_t] = True
+            ruleDict[int_t] = int_s
         if flag.count(True) == 256:
             break
 
+    print(ruleDict)
+    print(ruleDictHex)
     # second convert dat file
     in_file = 'in.dat'
     out_file = 'out.jpg'
@@ -62,4 +72,4 @@ except Exception as e:
     print(traceback.format_exc())
     print('-' * 10)
 
-#input(u'按任意键退出\n')
+# input(u'按任意键退出\n')
