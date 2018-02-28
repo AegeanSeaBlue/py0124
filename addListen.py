@@ -2,6 +2,7 @@ from watchdog.observers import Observer
 from watchdog.events import *
 import time
 from copyFile import copyFile
+from datToJpg import datToJpg
 
 
 class FileEventHandler(FileSystemEventHandler):
@@ -20,6 +21,8 @@ class FileEventHandler(FileSystemEventHandler):
             # else:
             if 'Tiny' in event.src_path:
                 copyFile(event.src_path, 'D:/image/weixintemp/dat/Tiny/')
+            elif 'send' in event.src_path:
+                print('Send file.')
             else:
                 copyFile(event.src_path, 'D:/image/weixintemp/dat/')
 
