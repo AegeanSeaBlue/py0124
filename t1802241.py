@@ -1,1 +1,1 @@
-import watchdog
+print('tiny' not in 'tiny')

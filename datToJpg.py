@@ -37,3 +37,4 @@ def openDat(srcFile='', desc=''):
 def datToJpg(src, descDir):
     t = threading.Thread(target=openDat, args=(src, descDir))
     t.start()
+    t.join()
