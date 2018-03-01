@@ -1,6 +1,6 @@
 import os
 import shutil
-import time
+#import time
 from datToJpg import datToJpg
 
 
