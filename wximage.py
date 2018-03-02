@@ -46,8 +46,8 @@ def datToJpg(src, descDir):
 
 
 def copyFile(src, descDir):
+    srcPath, fileName = os.path.split(src)
     try:
-        srcPath, fileName = os.path.split(src)
         # descPath = descDir + time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime(time.time())) + '_' + fileName
         descPath = descDir + fileName
         shutil.copy(src, descPath)
@@ -55,7 +55,7 @@ def copyFile(src, descDir):
         if 'Tiny' not in src:
             datToJpg(descPath, 'D:/image/weixintemp/image/')
     except:
-        print('Copy DAT Failed!')
+        print(fileName,'Copy DAT Failed!')
         pass
 
 
@@ -65,11 +65,12 @@ class FileEventHandler(FileSystemEventHandler):
 
     def on_created(self, event):
         if event.is_directory is False:
-            if 'Tiny' in event.src_path:
-                copyFile(event.src_path, 'D:/image/weixintemp/dat/Tiny/')
-            elif 'send' in event.src_path:
-                print('Send file.')
-            else:
+            # if 'Tiny' in event.src_path:
+            #     copyFile(event.src_path, 'D:/image/weixintemp/dat/Tiny/')
+            # elif 'send' in event.src_path:
+            #     print('Send file.')
+            # else:
+            if ('Tiny' not in event.src_path) and ('send' not in event.src_path):
                 copyFile(event.src_path, 'D:/image/weixintemp/dat/')
 
 
