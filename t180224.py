@@ -5,8 +5,8 @@ try:
     # wechat image convert
 
     # first need two file to find rule
-    trans = 'color_trans.dat'
-    sheet = 'color_sheet.jpg'
+    trans = 'own/color_trans.dat'
+    sheet = 'own/color_sheet.jpg'
 
     binfile = open(trans, 'rb')
     a = binfile.read()

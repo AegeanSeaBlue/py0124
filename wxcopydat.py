@@ -5,7 +5,6 @@ import os
 import shutil
 import binascii
 import threading
-import imghdr
 from datDictJpg import ruleDictHex
 
 
@@ -14,7 +13,7 @@ def transFile(dat=b'', srcFile='', desc=''):
     hex_dat = binascii.b2a_hex(dat)
     for i in range(len(hex_dat) // 2):
         hex_datChar = str(hex_dat[2 * i:2 * (i + 1)], encoding='utf-8')
-        hex_jpgChar = ruleDictHex.get(hex_datChar)
+        hex_jpgChar = ruleDictHex[hex_datChar]
         if hex_jpgChar is not None:
             jpgStr += hex_jpgChar
         else:
@@ -27,25 +26,14 @@ def transFile(dat=b'', srcFile='', desc=''):
         print(srcName, u'Conversion successful.')
 
 
-def writeImage(srcFile='', desc=''):
-    srcDir, srcName = os.path.split(srcFile)
-    descFile = desc + srcName.replace('.dat', '.jpg')
-    shutil.copy(srcFile, descFile)
-    print('Copy', descFile)
-
-
 def openDat(srcFile='', desc=''):
     if os.path.exists(srcFile) is True:
-        if imghdr.what(srcFile) is not None:
-            writeImage(srcFile=srcFile, desc=desc)
-
-        else:
-            try:
-                with open(srcFile, 'rb') as file:
-                    dat = file.read()
-                    transFile(dat=dat, srcFile=srcFile, desc=desc)
-            except:
-                print('Change Failed !')
+        try:
+            with open(srcFile, 'rb') as file:
+                dat = file.read()
+                transFile(dat=dat, srcFile=srcFile, desc=desc)
+        except:
+            print('Change Failed !')
     else:
         print('DAT file not exist !')
 
@@ -64,10 +52,8 @@ def copyFile(src, descDir):
         descPath = descDir + fileName
         shutil.copy(src, descPath)
         print('Copy', fileName)
-        if 'Tiny' not in src:
-            datToJpg(descPath, 'E:/image/weixintemp/image/')
     except:
-        print(fileName, 'Copy DAT Failed!')
+        print(fileName,'Copy DAT Failed!')
         pass
 
 
